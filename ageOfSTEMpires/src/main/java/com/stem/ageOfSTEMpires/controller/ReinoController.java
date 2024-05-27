@@ -269,8 +269,8 @@ public class ReinoController {
         }
     }
 
-    @GetMapping("/reino/atacar/{idAtacante}/{idDefensor}")
-    public int atacar(@PathVariable int idAtacante, @PathVariable int idDefensor) throws SQLException{
+    @GetMapping("/reino/atacar/{idAtacante}_{idDefensor}")
+    public int atacar(@PathVariable Integer idAtacante, @PathVariable Integer idDefensor) throws SQLException{
         int ganador = 0;
         int puntuacionAtacante = 0;
         int puntuacionDefensor = 0;
