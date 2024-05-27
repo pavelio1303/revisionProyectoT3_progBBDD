@@ -270,8 +270,25 @@ public class ReinoController {
     }
 
     @GetMapping("/reino/atacar/{idAtacante}/{idDefensor}")
-    public int atacar(@PathVariable Integer idAtacante, @PathVariable Integer idDefensor) throws SQLException{
+    public int atacar(@PathVariable int idAtacante, @PathVariable int idDefensor) throws SQLException{
+        int ganador = 0;
+        int puntuacionAtacante = 0;
+        int puntuacionDefensor = 0;
 
+        if (getReinoById(idAtacante).getId() == 0 || getReinoById(idDefensor).getId() == 0){
+            ganador = 0;
+        }else{
+            puntuacionAtacante = calcularPuntuacionReino(getReinoById(idAtacante));
+            puntuacionDefensor = calcularPuntuacionReino(getReinoById(idDefensor));
+        }
+
+        if (puntuacionAtacante > puntuacionDefensor){
+            ganador = idAtacante;
+        }else if (puntuacionAtacante < puntuacionDefensor){
+            ganador = idDefensor;
+        }
+
+        return ganador;
     } 
 
     public int calcularPuntuacionReino(Reino reino) throws SQLException{
